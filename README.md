@@ -2,8 +2,8 @@
 
 **Tested on Gradle versions from <!--property:gradle-api.min-version-->8.7<!--/property--> to <!--property:gradle-api.max-version-->8.8-rc-1<!--/property-->.**
 
-# `name.remal.template` plugin
+# `name.remal.jacoco-to-cobertura` plugin
 
-[![configuration cache: not supported](https://img.shields.io/static/v1?label=configuration%20cache&message=not%20supported&color=inactive)](https://docs.gradle.org/current/userguide/configuration_cache.html)
+[![configuration cache: supported](https://img.shields.io/static/v1?label=configuration%20cache&message=supported&color=success)](https://docs.gradle.org/current/userguide/configuration_cache.html)
 
-Gradle plugin template
+

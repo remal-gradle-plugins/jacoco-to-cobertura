@@ -32,10 +32,10 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        'name.remal.template-plugin' {
-            id = 'name.remal.template-plugin'
-            implementationClass = 'name.remal.gradle_plugins.template.TemplatePlugin'
-            displayName = 'Template plugin'
+        'name.remal.jacoco-to-cobertura' {
+            id = 'name.remal.jacoco-to-cobertura'
+            implementationClass = 'name.remal.gradle_plugins.jacoco_to_cobertura.JacocoToCoberturaPlugin'
+            displayName = 'Convert Jacoco XML reports to Cobertura format'
             description = property('repository-description')
         }
     }
