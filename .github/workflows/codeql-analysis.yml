@@ -1,0 +1,44 @@
+name: CodeQL Analysis
+
+on:
+  schedule:
+  - cron: '29 3 * * *' # sync-with-template: adjust
+  workflow_dispatch: { }
+
+env:
+  DEFAULT_JAVA_VERSION: 17
+  GRADLE_OPTS: -Dorg.gradle.parallel=true -Dorg.gradle.workers.max=4 -Dorg.gradle.warning.mode=all -Dorg.gradle.daemon=false -Dhttp.keepAlive=false -Dsun.net.client.defaultConnectTimeout=15000 -Dsun.net.client.defaultReadTimeout=600000 -Dsun.net.http.retryPost=false -Dsun.io.useCanonCaches=false -Djava.awt.headless=true -Dorg.gradle.internal.launcher.welcomeMessageEnabled=false
+
+jobs:
+  codeql-analysis:
+    name: CodeQL Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+    - name: Setup Java ${{env.DEFAULT_JAVA_VERSION}}
+      uses: actions/setup-java@v4
+      with:
+        java-version: |
+          ${{env.DEFAULT_JAVA_VERSION}}
+        distribution: temurin
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 2
+    - name: Validate Gradle Wrapper
+      uses: gradle/wrapper-validation-action@v3
+    - name: Cache Gradle
+      id: cache-gradle
+      uses: remal-github-actions/cache-gradle@main
+      with:
+        build-cache-enabled: 'false'
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: java
+    - name: Compile
+      run: |
+        ./gradlew allClasses
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3

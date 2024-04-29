@@ -1,0 +1,38 @@
+repositories:
+- remal-gradle-plugins/template
+
+transformations:
+- name: .gitignore
+  format: text
+  includes:
+  - .gitignore
+  script: |
+    return content
+        .replace(/(^|\n)!\/\.idea\/externalDependencies\.xml(\n|$)/, '$1')
+        .replace(/(^|\n)!\/\.idea\/saveactions_settings\.xml(\n|$)/, '$1')
+        + [
+            '',
+            '# Remal Gradle plugins:',
+            '/gradle-ci.properties',
+            '',
+        ].join('\n')
+- name: mergify
+  format: text
+  includes:
+  - .mergify/config.yml
+  script: |
+    return content
+        .replaceAll(/(`)build\1/g, '$1cross-versions-tests-success$1')
+        .replaceAll(/(=\s*)build(\n|$)/g, '$1cross-versions-tests-success$2')
+- name: renovate
+  format: text
+  includes:
+  - .github/renovate.json5
+  replaceWithText: |
+    {
+      $schema: "https://docs.renovatebot.com/renovate-schema.json",
+      extends: ["github>remal-gradle-plugins/plugins-renovate-config:base"],
+
+      // $$$sync-with-template-modifiable: local $$$
+      // $$$sync-with-template-modifiable-end$$$
+    }

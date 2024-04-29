@@ -1,0 +1,42 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+buildscript {
+    String rootGroupId = project.ext.rootGroupId = "name.remal.gradle-plugins.${rootProject.name}"
+    String rootArtifactId = project.ext.rootArtifactId = rootProject.name
+    String rootSnapshotVersion = project.ext.rootSnapshotVersion = '2-SNAPSHOT'
+    dependencies {
+        //classpath("$rootGroupId:$rootArtifactId:$rootSnapshotVersion") { version { strictly(rootSnapshotVersion) } }
+        classpath 'name.remal.gradle-plugins.toolkit:build-logic:0.63.17'
+    }
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+allprojects {
+    group = project.rootGroupId
+    version = project.rootSnapshotVersion
+}
+
+apply plugin: 'name.remal.toolkit.build-logic'
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+apply plugin: 'java-gradle-plugin'
+
+dependencies {
+}
+
+gradlePlugin {
+    plugins {
+        'name.remal.template-plugin' {
+            id = 'name.remal.template-plugin'
+            implementationClass = 'name.remal.gradle_plugins.template.TemplatePlugin'
+            displayName = 'Template plugin'
+            description = property('repository-description')
+        }
+    }
+}
