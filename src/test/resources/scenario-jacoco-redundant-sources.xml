@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><!DOCTYPE report PUBLIC "-//JACOCO//DTD Report 1.1//EN" "report.dtd">
+<report name="test">
+  <package name="pkg">
+    <class name="pkg/Test" sourcefilename="Test.java">
+      <method name="consumeString1" desc="([Ljava/lang/String;)Z" line="21">
+        <counter type="INSTRUCTION" missed="81" covered="0"/>
+        <counter type="BRANCH" missed="2" covered="0"/>
+        <counter type="LINE" missed="14" covered="0"/>
+        <counter type="COMPLEXITY" missed="2" covered="0"/>
+        <counter type="METHOD" missed="1" covered="0"/>
+      </method>
+      <method name="consumeString2" desc="(Ljava/util/Map$Entry;)V" line="37">
+        <counter type="INSTRUCTION" missed="16" covered="0"/>
+        <counter type="BRANCH" missed="2" covered="0"/>
+        <counter type="LINE" missed="4" covered="0"/>
+        <counter type="COMPLEXITY" missed="2" covered="0"/>
+        <counter type="METHOD" missed="1" covered="0"/>
+      </method>
+      <method name="consumeString3" desc="(Ljava/lang/String;)Z" line="23">
+        <counter type="INSTRUCTION" missed="12" covered="0"/>
+        <counter type="BRANCH" missed="4" covered="0"/>
+        <counter type="LINE" missed="1" covered="0"/>
+        <counter type="COMPLEXITY" missed="3" covered="0"/>
+        <counter type="METHOD" missed="1" covered="0"/>
+      </method>
+      <counter type="INSTRUCTION" missed="109" covered="0"/>
+      <counter type="BRANCH" missed="8" covered="0"/>
+      <counter type="LINE" missed="18" covered="0"/>
+      <counter type="COMPLEXITY" missed="7" covered="0"/>
+      <counter type="METHOD" missed="3" covered="0"/>
+      <counter type="CLASS" missed="1" covered="0"/>
+    </class>
+    <sourcefile name="Test.java">
+      <line nr="21" mi="0" ci="1" mb="0" cb="0"/>
+      <line nr="23" mi="17" ci="0" mb="4" cb="0"/>
+      <line nr="35" mi="5" ci="0" mb="0" cb="0"/>
+      <line nr="36" mi="1" ci="0" mb="0" cb="0"/>
+      <line nr="37" mi="5" ci="0" mb="0" cb="0"/>
+      <line nr="38" mi="3" ci="0" mb="2" cb="0"/>
+      <line nr="39" mi="0" ci="4" mb="0" cb="1"/>
+      <line nr="41" mi="1" ci="0" mb="0" cb="0"/>
+      <line nr="43" mi="2" ci="0" mb="0" cb="0"/>
+      <counter type="INSTRUCTION" missed="109" covered="0"/>
+      <counter type="BRANCH" missed="8" covered="0"/>
+      <counter type="LINE" missed="18" covered="0"/>
+      <counter type="COMPLEXITY" missed="7" covered="0"/>
+      <counter type="METHOD" missed="3" covered="0"/>
+      <counter type="CLASS" missed="1" covered="0"/>
+    </sourcefile>
+    <sourcefile name="TestRedundant.java">
+      <line nr="21" mi="10" ci="1" mb="10" cb="0"/>
+      <line nr="23" mi="117" ci="0" mb="14" cb="0"/>
+      <line nr="35" mi="15" ci="0" mb="10" cb="0"/>
+      <line nr="36" mi="11" ci="0" mb="10" cb="0"/>
+      <line nr="37" mi="15" ci="0" mb="10" cb="0"/>
+      <line nr="38" mi="13" ci="0" mb="12" cb="0"/>
+      <line nr="39" mi="10" ci="4" mb="10" cb="1"/>
+      <line nr="41" mi="11" ci="0" mb="10" cb="0"/>
+      <line nr="43" mi="12" ci="0" mb="10" cb="0"/>
+      <counter type="INSTRUCTION" missed="109" covered="0"/>
+      <counter type="BRANCH" missed="8" covered="0"/>
+      <counter type="LINE" missed="18" covered="0"/>
+      <counter type="COMPLEXITY" missed="7" covered="0"/>
+      <counter type="METHOD" missed="3" covered="0"/>
+      <counter type="CLASS" missed="1" covered="0"/>
+    </sourcefile>
+    <counter type="INSTRUCTION" missed="109" covered="0"/>
+    <counter type="BRANCH" missed="8" covered="0"/>
+    <counter type="LINE" missed="18" covered="0"/>
+    <counter type="COMPLEXITY" missed="7" covered="0"/>
+    <counter type="METHOD" missed="3" covered="0"/>
+    <counter type="CLASS" missed="1" covered="0"/>
+  </package>
+  <counter type="INSTRUCTION" missed="4285" covered="326"/>
+  <counter type="BRANCH" missed="374" covered="36"/>
+  <counter type="LINE" missed="1058" covered="84"/>
+  <counter type="COMPLEXITY" missed="489" covered="26"/>
+  <counter type="METHOD" missed="295" covered="15"/>
+  <counter type="CLASS" missed="67" covered="7"/>
+</report>
