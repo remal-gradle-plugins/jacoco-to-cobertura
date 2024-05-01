@@ -2,6 +2,7 @@ package name.remal.gradle_plugins.jacoco_to_cobertura;
 
 import static java.lang.String.format;
 import static name.remal.gradle_plugins.toolkit.ObjectUtils.doNotInline;
+import static name.remal.gradle_plugins.toolkit.ReportUtils.setReportEnabled;
 import static name.remal.gradle_plugins.toolkit.TaskUtils.doBeforeTaskExecution;
 
 import lombok.val;
@@ -50,7 +51,7 @@ public class JacocoToCoberturaPlugin implements Plugin<Project> {
     }
 
     private static void enableJacocoXmlReport(JacocoReport jacocoTask) {
-        jacocoTask.getReports().getXml().getRequired().set(true);
+        setReportEnabled(jacocoTask.getReports().getXml(), true);
     }
 
 }
