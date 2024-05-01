@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.stream.StreamSupport;
 import lombok.SneakyThrows;
 import lombok.val;
+import name.remal.gradle_plugins.toolkit.testkit.MinSupportedGradleVersion;
 import name.remal.gradle_plugins.toolkit.testkit.MinSupportedJavaVersion;
 import net.razvan.Cobertura;
 import net.razvan.Jacoco;
@@ -39,6 +40,7 @@ import org.w3c.dom.Element;
 import org.xmlunit.builder.DiffBuilder;
 
 @MinSupportedJavaVersion(11)
+@MinSupportedGradleVersion("6.8")
 class JacocoToCoberturaTransformerTest {
 
     private static final List<String> sources = ImmutableList.of("/src/main/java");
