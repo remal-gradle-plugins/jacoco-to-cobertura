@@ -28,6 +28,17 @@ Created tasks are not executed automatically. It can be done by this script:
 tasks.withType(JacocoReport).configureEach { finalizedBy("${name}ToCobertura") }
 ```
 
-## `allJacocoReportToCobertura` task
+## `jacocoToCoberturaTask` extension for `JacocoReport` tasks
 
-This plugin creates `allJacocoReportToCobertura` task which executes all `*ToCobertura` tasks.
+This plugin add `jacocoToCoberturaTask` extension to all `JacocoReport` tasks.
+This extension has type `TaskProvider<JacocoToCobertura>`
+and it's a provider of corresponding `*ToCobertura` task for the current `JacocoReport` task.
+
+It can be used like this:
+
+```groovy
+tasks.withType(JacocoReport).configureEach {
+  println jacocoToCoberturaTask.name // prints corresponding name of `*ToCobertura` task
+  finalizedBy(jacocoToCoberturaTask) // finalize this `JacocoReport` task with corresponding `*ToCobertura` task
+}
+```

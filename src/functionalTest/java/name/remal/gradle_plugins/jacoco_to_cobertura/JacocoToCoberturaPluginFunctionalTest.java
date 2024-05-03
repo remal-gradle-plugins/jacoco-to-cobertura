@@ -24,7 +24,7 @@ class JacocoToCoberturaPluginFunctionalTest {
     void beforeEach() {
         project.forBuildFile(build -> {
             build.applyPlugin("name.remal.jacoco-to-cobertura");
-            build.registerDefaultTask("allJacocoReportToCobertura");
+            build.registerDefaultTask("jacocoTestReportToCobertura");
 
             build.applyPlugin("java");
             build.applyPlugin("jacoco");
@@ -33,8 +33,11 @@ class JacocoToCoberturaPluginFunctionalTest {
                 test.append("useJUnitPlatform()");
             });
 
-            build.append("tasks.jacocoTestReport.dependsOn('test')");
-            build.append("tasks.jacocoTestReport.reports.xml.outputLocation = file('build/jacoco.xml')");
+            build.appendBlock("tasks.jacocoTestReport", taskBlock -> {
+                taskBlock.append("dependsOn('test')");
+                taskBlock.append("reports.xml.outputLocation = file('build/jacoco.xml')");
+                taskBlock.append("finalizedBy(jacocoToCoberturaTask)");
+            });
             coberturaReportPath = project.resolveRelativePath("build/cobertura-jacoco.xml");
 
             build.addMavenCentralRepository();
