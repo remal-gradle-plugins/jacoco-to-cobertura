@@ -81,7 +81,7 @@ configurations.testImplementation.dependencies.addAllLater(
 @CacheableRule
 abstract class TargetJvmVersionRule implements ComponentMetadataRule {
 
-    private final Integer jvmVersion
+    final Integer jvmVersion
 
     @Inject
     TargetJvmVersionRule(Integer jvmVersion) {
