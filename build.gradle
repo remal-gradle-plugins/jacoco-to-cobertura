@@ -80,7 +80,8 @@ configurations.testImplementation.dependencies.addAllLater(
 
 @CacheableRule
 abstract class TargetJvmVersionRule implements ComponentMetadataRule {
-    final Integer jvmVersion
+
+    private final Integer jvmVersion
 
     @Inject
     TargetJvmVersionRule(Integer jvmVersion) {
@@ -88,7 +89,7 @@ abstract class TargetJvmVersionRule implements ComponentMetadataRule {
     }
 
     @Inject
-    abstract ObjectFactory getObjects()
+    protected abstract ObjectFactory getObjects()
 
     void execute(ComponentMetadataContext context) {
         context.details.allVariants {
@@ -98,4 +99,10 @@ abstract class TargetJvmVersionRule implements ComponentMetadataRule {
             }
         }
     }
+
+    @Override
+    String toString() {
+        return "${getClass().simpleName}[$jvmVersion]"
+    }
+
 }
