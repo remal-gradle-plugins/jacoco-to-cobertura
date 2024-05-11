@@ -8,6 +8,7 @@
 
 For every [`JacocoReport`](https://docs.gradle.org/current/javadoc/org/gradle/testing/jacoco/tasks/JacocoReport.html) task,
 this plugin creates a task that converts Jacoco XML report to Cobertura format.
+This new task is executed automatically after corresponding `JacocoReport` task (via `finalizedBy`).
 
 It can be useful for [GitLab test coverage visualization](https://docs.gitlab.com/ee/ci/testing/test_coverage_visualization.html).
 
@@ -22,12 +23,6 @@ Example:
 
 * `build/reports/jacoco/test/jacocoTestReport.xml` -> `build/reports/jacoco/test/cobertura-jacocoTestReport.xml`
 
-Created tasks are not executed automatically. It can be done by this script:
-
-```groovy
-tasks.withType(JacocoReport).configureEach { finalizedBy("${name}ToCobertura") }
-```
-
 ## `jacocoToCoberturaTask` extension for `JacocoReport` tasks
 
 This plugin add `jacocoToCoberturaTask` extension to all `JacocoReport` tasks.
@@ -39,6 +34,5 @@ It can be used like this:
 ```groovy
 tasks.withType(JacocoReport).configureEach {
   println jacocoToCoberturaTask.name // prints corresponding name of `*ToCobertura` task
-  finalizedBy(jacocoToCoberturaTask) // finalize this `JacocoReport` task with corresponding `*ToCobertura` task
 }
 ```

@@ -2,6 +2,7 @@ package name.remal.gradle_plugins.jacoco_to_cobertura;
 
 import static java.lang.String.join;
 import static java.math.RoundingMode.HALF_UP;
+import static name.remal.gradle_plugins.toolkit.testkit.GradleDependencyVersions.getJUnitVersion;
 import static name.remal.gradle_plugins.toolkit.xml.XmlUtils.parseXml;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,14 +37,12 @@ class JacocoToCoberturaPluginFunctionalTest {
             build.appendBlock("tasks.jacocoTestReport", taskBlock -> {
                 taskBlock.append("dependsOn('test')");
                 taskBlock.append("reports.xml.outputLocation = file('build/jacoco.xml')");
-                taskBlock.append("finalizedBy(jacocoToCoberturaTask)");
             });
             coberturaReportPath = project.resolveRelativePath("build/cobertura-jacoco.xml");
 
             build.addMavenCentralRepository();
             build.appendBlock("dependencies", deps -> {
-                // TODO: replace with dynamic version
-                deps.append("testImplementation platform('org.junit:junit-bom:5.9.3')");
+                deps.append("testImplementation platform('org.junit:junit-bom:" + getJUnitVersion() + "')");
                 deps.append("testImplementation 'org.junit.jupiter:junit-jupiter-api'");
                 deps.append("testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'");
                 deps.append("testRuntimeOnly 'org.junit.platform:junit-platform-launcher'");

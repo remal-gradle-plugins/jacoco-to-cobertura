@@ -37,15 +37,16 @@ public class JacocoToCoberturaPlugin implements Plugin<Project> {
 
                 coberturaTask.dependsOn(jacocoTask);
 
-                // avoid unnecessary dependency to XML report location:
-                coberturaTask.getJacocoReport().set(coberturaTask.getProject().provider(() ->
-                    jacocoTask.getReports().getXml().getOutputLocation().getOrNull()
-                ));
+                coberturaTask.getJacocoReport().set(
+                    jacocoTask.getReports().getXml().getOutputLocation().getLocationOnly()
+                );
 
                 coberturaTask.getSourceDirectories().from(jacocoTask.getSourceDirectories());
                 coberturaTask.getSourceDirectories().from(jacocoTask.getAdditionalSourceDirs());
             }
         );
+
+        jacocoTask.finalizedBy(coberturaTaskProvider);
 
         getExtensions(jacocoTask).add(
             new TypeOf<TaskProvider<JacocoToCobertura>>() { },
