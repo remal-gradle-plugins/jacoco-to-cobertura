@@ -32,6 +32,7 @@ public abstract class JacocoToCobertura extends DefaultTask {
     @SkipWhenEmpty
     @org.gradle.api.tasks.Optional
     @InputFile
+    @PathSensitive(RELATIVE)
     public abstract RegularFileProperty getJacocoReport();
 
     {
