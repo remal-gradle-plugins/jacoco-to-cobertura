@@ -34,6 +34,7 @@ class JacocoToCoberturaPluginTest {
                 val taskClass = unwrapGeneratedSubclass(task.getClass());
                 return taskClass.getName().startsWith(taskClassNamePrefix);
             })
+            .map(TaskValidations::markTaskDependenciesAsSkipped)
             .forEach(TaskValidations::assertNoTaskPropertiesProblems);
     }
 

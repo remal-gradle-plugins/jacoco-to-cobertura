@@ -13,6 +13,12 @@
 
 [![configuration cache: supported](https://img.shields.io/static/v1?label=configuration%20cache&message=supported&color=success)](https://docs.gradle.org/current/userguide/configuration_cache.html)
 
+Usage:
+
+<!--plugin-usage:name.remal.jacoco-to-cobertura--><!--/plugin-usage-->
+
+&nbsp;
+
 For every [`JacocoReport`](https://docs.gradle.org/current/javadoc/org/gradle/testing/jacoco/tasks/JacocoReport.html) task,
 this plugin creates a task that converts Jacoco XML report to Cobertura format.
 This new task is executed automatically after corresponding `JacocoReport` task (via `finalizedBy`).
