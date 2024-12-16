@@ -15,7 +15,13 @@
 
 Usage:
 
-<!--plugin-usage:name.remal.jacoco-to-cobertura--><!--/plugin-usage-->
+<!--plugin-usage:name.remal.jacoco-to-cobertura-->
+```groovy
+plugins {
+    id 'name.remal.jacoco-to-cobertura' version '1.0.4'
+}
+```
+<!--/plugin-usage-->
 
 &nbsp;
 
