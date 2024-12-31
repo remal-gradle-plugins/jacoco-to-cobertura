@@ -10,7 +10,8 @@
       ],
       matchPackageNames: [
         "net.razvan:JacocoToCoberturaPlugin",
-      ]
+      ],
+      enabled: false,
     }
   ],
   // $$$sync-with-template-modifiable-end$$$
