@@ -3,5 +3,15 @@
   extends: ["github>remal-gradle-plugins/plugins-renovate-config:base"],
 
   // $$$sync-with-template-modifiable: local $$$
+  packageRules: [
+    {
+      matchCategories: [
+        "java"
+      ],
+      matchPackageNames: [
+        "net.razvan:JacocoToCoberturaPlugin",
+      ]
+    }
+  ],
   // $$$sync-with-template-modifiable-end$$$
 }
