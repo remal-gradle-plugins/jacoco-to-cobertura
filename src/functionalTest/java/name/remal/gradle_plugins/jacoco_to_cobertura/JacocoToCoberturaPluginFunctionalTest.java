@@ -25,27 +25,26 @@ class JacocoToCoberturaPluginFunctionalTest {
     void beforeEach() {
         project.forBuildFile(build -> {
             build.applyPlugin("name.remal.jacoco-to-cobertura");
-            build.registerDefaultTask("jacocoTestReportToCobertura");
 
             build.applyPlugin("java");
             build.applyPlugin("jacoco");
-            build.appendBlock("tasks.test", test -> {
-                test.append("finalizedBy('jacocoTestReport')");
-                test.append("useJUnitPlatform()");
+            build.block("tasks.test", test -> {
+                test.line("finalizedBy('jacocoTestReport')");
+                test.line("useJUnitPlatform()");
             });
 
-            build.appendBlock("tasks.jacocoTestReport", taskBlock -> {
-                taskBlock.append("dependsOn('test')");
-                taskBlock.append("reports.xml.outputLocation = file('build/jacoco.xml')");
+            build.block("tasks.jacocoTestReport", taskBlock -> {
+                taskBlock.line("dependsOn('test')");
+                taskBlock.line("reports.xml.outputLocation = file('build/jacoco.xml')");
             });
             coberturaReportPath = project.resolveRelativePath("build/cobertura-jacoco.xml");
 
             build.addMavenCentralRepository();
-            build.appendBlock("dependencies", deps -> {
-                deps.append("testImplementation platform('org.junit:junit-bom:" + getJUnitVersion() + "')");
-                deps.append("testImplementation 'org.junit.jupiter:junit-jupiter-api'");
-                deps.append("testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'");
-                deps.append("testRuntimeOnly 'org.junit.platform:junit-platform-launcher'");
+            build.block("dependencies", deps -> {
+                deps.line("testImplementation platform('org.junit:junit-bom:" + getJUnitVersion() + "')");
+                deps.line("testImplementation 'org.junit.jupiter:junit-jupiter-api'");
+                deps.line("testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'");
+                deps.line("testRuntimeOnly 'org.junit.platform:junit-platform-launcher'");
             });
         });
 
@@ -70,7 +69,7 @@ class JacocoToCoberturaPluginFunctionalTest {
 
     @Test
     void emptyBuildDoesNotFail() {
-        project.assertBuildSuccessfully();
+        project.assertBuildSuccessfully("jacocoTestReportToCobertura");
 
         assertThat(coberturaReportPath).doesNotExist();
     }
@@ -95,7 +94,7 @@ class JacocoToCoberturaPluginFunctionalTest {
             ""
         ));
 
-        project.assertBuildSuccessfully();
+        project.assertBuildSuccessfully("jacocoTestReportToCobertura");
 
         assertThat(coberturaReportPath).exists();
         assertThat(readTotalCoverage()).isEqualTo("0.00");
@@ -121,7 +120,7 @@ class JacocoToCoberturaPluginFunctionalTest {
             ""
         ));
 
-        project.assertBuildSuccessfully();
+        project.assertBuildSuccessfully("jacocoTestReportToCobertura");
 
         assertThat(coberturaReportPath).exists();
         assertThat(readTotalCoverage()).isEqualTo("0.67");
