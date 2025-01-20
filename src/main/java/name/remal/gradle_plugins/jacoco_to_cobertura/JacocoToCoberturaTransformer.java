@@ -29,7 +29,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
-import lombok.val;
 import org.w3c.dom.Document;
 
 @NoArgsConstructor(access = PRIVATE)
@@ -41,32 +40,32 @@ abstract class JacocoToCoberturaTransformer {
         Path coberturaReportPath,
         Collection<String> sources
     ) {
-        val jacocoReportDocument = parseXml(jacocoReportPath);
-        val transformSource = new DOMSource(jacocoReportDocument, jacocoReportPath.toString());
-        val transformResult = new DOMResult();
+        var jacocoReportDocument = parseXml(jacocoReportPath);
+        var transformSource = new DOMSource(jacocoReportDocument, jacocoReportPath.toString());
+        var transformResult = new DOMResult();
         TEMPLATES.newTransformer().transform(transformSource, transformResult);
 
 
-        val document = (Document) transformResult.getNode();
-        val documentElement = document.getDocumentElement();
+        var document = (Document) transformResult.getNode();
+        var documentElement = document.getDocumentElement();
 
         /*
          * XSLT 1.0 doesn't support sequences as parameters.
          * That's why we need to transform to DOM document and insert sources manually.
          */
-        val sourcesNode = document.createElement("sources");
+        var sourcesNode = document.createElement("sources");
         documentElement.insertBefore(sourcesNode, documentElement.getFirstChild());
         sources.stream()
             .filter(Objects::nonNull)
             .distinct()
             .forEach(source -> {
-                val sourceNode = document.createElement("source");
+                var sourceNode = document.createElement("source");
                 sourceNode.setTextContent(source);
                 sourcesNode.appendChild(sourceNode);
             });
 
-        try (val outputStream = newOutputStream(createParentDirectories(coberturaReportPath))) {
-            val documentString = isInTest()
+        try (var outputStream = newOutputStream(createParentDirectories(coberturaReportPath))) {
+            var documentString = isInTest()
                 ? prettyXmlString(document)
                 : compactXmlString(document);
             outputStream.write(documentString.getBytes(UTF_8));
@@ -79,7 +78,7 @@ abstract class JacocoToCoberturaTransformer {
     private static final boolean WITH_CUSTOM_ERROR_LISTENER = true;
 
     static {
-        val transformerFactory = TransformerFactory.newInstance();
+        var transformerFactory = TransformerFactory.newInstance();
 
         if (WITH_CUSTOM_ERROR_LISTENER) {
             transformerFactory.setErrorListener(new ErrorListener() {
@@ -110,9 +109,9 @@ abstract class JacocoToCoberturaTransformer {
         tryToSetAttribute(transformerFactory, "package-name", packageNameOf(JacocoToCoberturaTransformer.class));
 
 
-        val xsltFileUrl = getResourceUrl("jacoco-to-cobertura.xsl", JacocoToCoberturaTransformer.class);
-        try (val inputStream = openInputStreamForUrl(xsltFileUrl)) {
-            val source = new StreamSource(inputStream, xsltFileUrl.toString());
+        var xsltFileUrl = getResourceUrl("jacoco-to-cobertura.xsl", JacocoToCoberturaTransformer.class);
+        try (var inputStream = openInputStreamForUrl(xsltFileUrl)) {
+            var source = new StreamSource(inputStream, xsltFileUrl.toString());
             TEMPLATES = transformerFactory.newTemplates(source);
         } catch (Exception e) {
             throw sneakyThrow(e);

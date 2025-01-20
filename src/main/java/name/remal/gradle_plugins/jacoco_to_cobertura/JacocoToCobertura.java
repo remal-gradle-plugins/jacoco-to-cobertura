@@ -9,7 +9,6 @@ import static org.gradle.api.tasks.PathSensitivity.RELATIVE;
 import java.io.File;
 import javax.inject.Inject;
 import lombok.SneakyThrows;
-import lombok.val;
 import name.remal.gradle_plugins.toolkit.PathUtils;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.file.ConfigurableFileCollection;
@@ -37,7 +36,7 @@ public abstract class JacocoToCobertura extends DefaultTask {
 
     {
         onlyIf(__ -> {
-            val jacocoReportFile = getJacocoReport()
+            var jacocoReportFile = getJacocoReport()
                 .getLocationOnly()
                 .map(RegularFile::getAsFile)
                 .getOrNull();
@@ -56,7 +55,7 @@ public abstract class JacocoToCobertura extends DefaultTask {
 
     {
         getCoberturaReport().convention(getProviders().provider(() -> {
-            val jacocoReportFile = getJacocoReport()
+            var jacocoReportFile = getJacocoReport()
                 .getLocationOnly()
                 .map(RegularFile::getAsFile)
                 .getOrNull();
@@ -65,8 +64,8 @@ public abstract class JacocoToCobertura extends DefaultTask {
             }
 
             final File resultFile;
-            val parentFile = jacocoReportFile.getParentFile();
-            val fileName = jacocoReportFile.getName();
+            var parentFile = jacocoReportFile.getParentFile();
+            var fileName = jacocoReportFile.getName();
             if (parentFile != null) {
                 resultFile = new File(parentFile, "cobertura-" + fileName);
             } else {
@@ -80,7 +79,7 @@ public abstract class JacocoToCobertura extends DefaultTask {
     @TaskAction
     @SneakyThrows
     public void execute() {
-        val coberturaReportPath = getCoberturaReport()
+        var coberturaReportPath = getCoberturaReport()
             .getLocationOnly()
             .map(RegularFile::getAsFile)
             .map(File::toPath)
@@ -88,7 +87,7 @@ public abstract class JacocoToCobertura extends DefaultTask {
             .get();
         deleteIfExists(coberturaReportPath);
 
-        val jacocoReportPath = getJacocoReport()
+        var jacocoReportPath = getJacocoReport()
             .getLocationOnly()
             .map(RegularFile::getAsFile)
             .map(File::toPath)

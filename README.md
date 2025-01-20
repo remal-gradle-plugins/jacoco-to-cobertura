@@ -16,11 +16,13 @@
 Usage:
 
 <!--plugin-usage:name.remal.jacoco-to-cobertura-->
+
 ```groovy
 plugins {
-    id 'name.remal.jacoco-to-cobertura' version '1.0.6'
+  id 'name.remal.jacoco-to-cobertura' version '1.0.6'
 }
 ```
+
 <!--/plugin-usage-->
 
 &nbsp;
@@ -55,3 +57,10 @@ tasks.withType(JacocoReport).configureEach {
   println jacocoToCoberturaTask.name // prints corresponding name of `*ToCobertura` task
 }
 ```
+
+# Migration guide
+
+## Version 1.* to 2.*
+
+The minimum Java version is 11 (from 8).
+The minimum Gradle version is 7.0 (from 6.1).

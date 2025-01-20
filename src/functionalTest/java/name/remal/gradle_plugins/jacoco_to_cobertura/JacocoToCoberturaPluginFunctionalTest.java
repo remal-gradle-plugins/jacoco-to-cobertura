@@ -9,7 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.math.BigDecimal;
 import java.nio.file.Path;
 import lombok.RequiredArgsConstructor;
-import lombok.val;
 import name.remal.gradle_plugins.toolkit.testkit.functional.GradleProject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -127,8 +126,8 @@ class JacocoToCoberturaPluginFunctionalTest {
     }
 
     private BigDecimal readTotalCoverage() {
-        val document = parseXml(coberturaReportPath);
-        val coverage = document.getDocumentElement().getAttribute("line-rate");
+        var document = parseXml(coberturaReportPath);
+        var coverage = document.getDocumentElement().getAttribute("line-rate");
         return new BigDecimal(coverage).setScale(2, HALF_UP);
     }
 

@@ -5,7 +5,6 @@ import static name.remal.gradle_plugins.toolkit.ExtensionContainerUtils.getExten
 import static name.remal.gradle_plugins.toolkit.ObjectUtils.doNotInline;
 import static name.remal.gradle_plugins.toolkit.TaskUtils.doBeforeTaskExecution;
 
-import lombok.val;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.reflect.TypeOf;
@@ -18,7 +17,7 @@ public class JacocoToCoberturaPlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project project) {
-        val tasks = project.getTasks();
+        var tasks = project.getTasks();
         tasks.withType(JacocoReport.class).all(JacocoToCoberturaPlugin::configureJacocoTask);
     }
 
@@ -26,7 +25,7 @@ public class JacocoToCoberturaPlugin implements Plugin<Project> {
         enableJacocoXmlReport(jacocoTask);
         doBeforeTaskExecution(jacocoTask, JacocoToCoberturaPlugin::enableJacocoXmlReport);
 
-        val coberturaTaskProvider = jacocoTask.getProject().getTasks().register(
+        var coberturaTaskProvider = jacocoTask.getProject().getTasks().register(
             jacocoTask.getName() + "ToCobertura",
             JacocoToCobertura.class,
             coberturaTask -> {
