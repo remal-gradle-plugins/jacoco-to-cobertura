@@ -18,7 +18,7 @@ Usage:
 <!--plugin-usage:name.remal.jacoco-to-cobertura-->
 ```groovy
 plugins {
-    id 'name.remal.jacoco-to-cobertura' version '1.0.6'
+    id 'name.remal.jacoco-to-cobertura' version '2.0.0'
 }
 ```
 <!--/plugin-usage-->
