@@ -2,7 +2,8 @@ package name.remal.gradle_plugins.jacoco_to_cobertura;
 
 import static java.lang.String.join;
 import static java.math.RoundingMode.HALF_UP;
-import static name.remal.gradle_plugins.toolkit.testkit.GradleDependencyVersions.getJUnitVersion;
+import static java.util.stream.Collectors.joining;
+import static name.remal.gradle_plugins.toolkit.testkit.TestClasspath.getTestClasspathLibraryFilePaths;
 import static name.remal.gradle_plugins.toolkit.xml.XmlUtils.parseXml;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -40,10 +41,28 @@ class JacocoToCoberturaPluginFunctionalTest {
 
             build.addMavenCentralRepository();
             build.block("dependencies", deps -> {
-                deps.line("testImplementation platform('org.junit:junit-bom:" + getJUnitVersion() + "')");
-                deps.line("testImplementation 'org.junit.jupiter:junit-jupiter-api'");
-                deps.line("testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'");
-                deps.line("testRuntimeOnly 'org.junit.platform:junit-platform-launcher'");
+                deps.line(
+                    "testImplementation files(%s)",
+                    getTestClasspathLibraryFilePaths("org.junit.jupiter:junit-jupiter-api").stream()
+                        .map(Path::toString)
+                        .map(path -> "'" + deps.escapeString(path) + "'")
+                        .collect(joining(", "))
+                );
+
+                deps.line(
+                    "testRuntimeOnly files(%s)",
+                    getTestClasspathLibraryFilePaths("org.junit.jupiter:junit-jupiter-engine").stream()
+                        .map(Path::toString)
+                        .map(path -> "'" + deps.escapeString(path) + "'")
+                        .collect(joining(", "))
+                );
+                deps.line(
+                    "testRuntimeOnly files(%s)",
+                    getTestClasspathLibraryFilePaths("org.junit.platform:junit-platform-launcher").stream()
+                        .map(Path::toString)
+                        .map(path -> "'" + deps.escapeString(path) + "'")
+                        .collect(joining(", "))
+                );
             });
         });
 
