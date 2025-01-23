@@ -39,7 +39,6 @@ class JacocoToCoberturaPluginFunctionalTest {
             });
             coberturaReportPath = project.resolveRelativePath("build/cobertura-jacoco.xml");
 
-            build.addMavenCentralRepository();
             build.block("dependencies", deps -> {
                 deps.line(
                     "testImplementation files(%s)",
