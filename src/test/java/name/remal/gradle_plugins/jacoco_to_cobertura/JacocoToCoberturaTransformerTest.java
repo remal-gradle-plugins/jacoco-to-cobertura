@@ -24,8 +24,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.StreamSupport;
 import lombok.SneakyThrows;
-import name.remal.gradle_plugins.toolkit.testkit.MinSupportedGradleVersion;
-import name.remal.gradle_plugins.toolkit.testkit.MinSupportedJavaVersion;
+import name.remal.gradle_plugins.toolkit.testkit.MinTestableGradleVersion;
+import name.remal.gradle_plugins.toolkit.testkit.MinTestableJavaVersion;
 import net.razvan.Cobertura;
 import net.razvan.Jacoco;
 import org.junit.jupiter.api.AfterEach;
@@ -37,8 +37,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xmlunit.builder.DiffBuilder;
 
-@MinSupportedJavaVersion(11)
-@MinSupportedGradleVersion("6.8")
+@MinTestableJavaVersion(11)
+@MinTestableGradleVersion("6.8")
 class JacocoToCoberturaTransformerTest {
 
     private static final List<String> sources = List.of("/src/main/java");
