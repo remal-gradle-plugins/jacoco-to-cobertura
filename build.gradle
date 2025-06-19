@@ -29,7 +29,7 @@ apply plugin: 'java-gradle-plugin'
 
 dependencies {
     testImplementation 'com.google.jimfs:jimfs:1.3.0'
-    testImplementation 'org.xmlunit:xmlunit-core:2.10.2'
+    testImplementation 'org.xmlunit:xmlunit-core:2.10.3'
     testImplementation 'io.github.classgraph:classgraph:4.8.179'
 }
 
