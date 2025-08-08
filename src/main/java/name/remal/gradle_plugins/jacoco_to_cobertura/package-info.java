@@ -1,4 +1,4 @@
-@NonNullApi
+@NullMarked
 package name.remal.gradle_plugins.jacoco_to_cobertura;
 
-import org.gradle.api.NonNullApi;
+import org.jspecify.annotations.NullMarked;
