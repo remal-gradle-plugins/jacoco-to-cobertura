@@ -1,4 +1,4 @@
 # This file is generated automatically by `collectAllGradlePluginApiDependencies` Gradle task.
 # Do not modify it yourself unless you know what you are doing.
 
-org.ow2.asm:asm-bom:9.8:@pom
+org.ow2.asm:asm-bom:9.9:@pom
