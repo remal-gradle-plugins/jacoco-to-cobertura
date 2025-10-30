@@ -39,7 +39,6 @@ gradlePlugin {
             id = 'name.remal.jacoco-to-cobertura'
             implementationClass = 'name.remal.gradle_plugins.jacoco_to_cobertura.JacocoToCoberturaPlugin'
             displayName = 'Convert Jacoco XML reports to Cobertura format'
-            description = property('repository-description')
         }
     }
 }
