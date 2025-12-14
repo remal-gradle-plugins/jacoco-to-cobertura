@@ -57,7 +57,7 @@ jobs:
 
     - name: Cache Gradle
       id: cache-gradle
-      uses: remal-github-actions/cache-gradle@main
+      uses: remal-github-actions/cache-gradle@v1
       with:
         build-cache-enabled: 'false'
 
@@ -109,7 +109,7 @@ jobs:
         submodules: recursive
         fetch-depth: 1
     - name: Cache Gradle
-      uses: remal-github-actions/cache-gradle@main
+      uses: remal-github-actions/cache-gradle@v1
     - name: Set DEFAULT_JAVA_VERSION
       uses: ./.github/workflows/actions/set-default-java-version
     - name: Setup Java ${{env.DEFAULT_JAVA_VERSION}}
@@ -209,7 +209,7 @@ jobs:
         submodules: recursive
         fetch-depth: 1
     - name: Cache Gradle
-      uses: remal-github-actions/cache-gradle@main
+      uses: remal-github-actions/cache-gradle@v1
     - name: Set DEFAULT_JAVA_VERSION
       uses: ./.github/workflows/actions/set-default-java-version
     - name: Setup Java ${{env.DEFAULT_JAVA_VERSION}}
@@ -267,7 +267,7 @@ jobs:
         submodules: recursive
         fetch-depth: 1
     - name: Cache Gradle
-      uses: remal-github-actions/cache-gradle@main
+      uses: remal-github-actions/cache-gradle@v1
     - name: Set DEFAULT_JAVA_VERSION
       uses: ./.github/workflows/actions/set-default-java-version
     - name: Setup Java ${{env.DEFAULT_JAVA_VERSION}}
@@ -373,7 +373,7 @@ jobs:
         submodules: recursive
         fetch-depth: 1
     - name: Cache Gradle
-      uses: remal-github-actions/cache-gradle@main
+      uses: remal-github-actions/cache-gradle@v1
     - name: Set DEFAULT_JAVA_VERSION
       uses: ./.github/workflows/actions/set-default-java-version
     - name: Setup Java ${{env.DEFAULT_JAVA_VERSION}}
@@ -418,7 +418,7 @@ jobs:
         submodules: recursive
         fetch-depth: 1
     - name: Cache Gradle
-      uses: remal-github-actions/cache-gradle@main
+      uses: remal-github-actions/cache-gradle@v1
     - name: Set DEFAULT_JAVA_VERSION
       uses: ./.github/workflows/actions/set-default-java-version
     - name: Setup Java ${{env.DEFAULT_JAVA_VERSION}}
