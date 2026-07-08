@@ -101,11 +101,6 @@ jobs:
           setEnvVar('CURRENT_JAVA_VERSION', '${{fromJSON(inputs.job-matrix-json)['java-runtime'] || ''}}' || process.env.DEFAULT_JAVA_VERSION || '')
           setEnvVar('DISABLE_COMPILATION', 'true')
           setEnvVar('DISABLE_VERIFICATION_EXCEPT_TESTS', 'true')
-    - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@v6
-      with:
-        validate-wrappers: false
-        workflow-job-context: ${{inputs.job-matrix-json}}
     - name: Setup Java ${{env.CURRENT_JAVA_VERSION != env.DEFAULT_JAVA_VERSION && format('{0} and {1}', env.DEFAULT_JAVA_VERSION, env.CURRENT_JAVA_VERSION) || env.DEFAULT_JAVA_VERSION}}
       uses: actions/setup-java@v5
       with:
@@ -113,6 +108,21 @@ jobs:
           ${{env.CURRENT_JAVA_VERSION != env.DEFAULT_JAVA_VERSION && env.CURRENT_JAVA_VERSION || ''}}
           ${{env.DEFAULT_JAVA_VERSION}}
         distribution: temurin
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v6
+      with:
+        validate-wrappers: false
+        workflow-job-context: ${{inputs.job-matrix-json}}
+        cache-read-only: ${{inputs.os == 'ubuntu'}}
+    - name: Restore Gradle build cache
+      id: restore-gradle-build-cache
+      if: ${{inputs.os == 'ubuntu' && env.GRADLE_BUILD_CACHE_ENABLED == 'true'}}
+      uses: actions/cache/restore@v6
+      with:
+        path: ~/.gradle/caches/build-cache-*
+        key: gradle-build-cache-${{inputs.os}}-${{steps.matrix-info.outputs.token}}-${{github.sha}}
+        restore-keys: |
+          gradle-build-cache-${{inputs.os}}-${{steps.matrix-info.outputs.token}}-
     - name: Download and extract workspace
       uses: ./.github/workflows/actions/download-extract-workspace
 
@@ -135,3 +145,16 @@ jobs:
         include-hidden-files: true
         if-no-files-found: warn
         retention-days: 90
+
+    - name: Save Gradle build cache
+      if: >-
+        ${{
+          github.ref == 'refs/heads/main'
+          && inputs.os == 'ubuntu'
+          && env.GRADLE_BUILD_CACHE_ENABLED == 'true'
+          && steps.restore-gradle-build-cache.outputs.cache-hit != 'true'
+        }}
+      uses: actions/cache/save@v6
+      with:
+        path: ~/.gradle/caches/build-cache-*
+        key: gradle-build-cache-${{inputs.os}}-${{steps.matrix-info.outputs.token}}-${{github.sha}}
