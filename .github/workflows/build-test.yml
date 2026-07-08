@@ -87,20 +87,25 @@ jobs:
         PARENT_ENV_JSON: ${{inputs.env-json}}
       with:
         script: |
+          function setEnvVar(name, value) {
+            core.exportVariable(name, value)
+            core.info(`  ${name}=${value}`)
+          }
           const parentEnv = JSON.parse(process.env.PARENT_ENV_JSON)
           for (const [name, value] of Object.entries(parentEnv)) {
             if (process.env[name] == null) {
               process.env[name] = value
-              core.exportVariable(name, value)
+              setEnvVar(name, value)
             }
           }
-          core.exportVariable('CURRENT_JAVA_VERSION', '${{fromJSON(inputs.job-matrix-json)['java-runtime'] || ''}}' || process.env.DEFAULT_JAVA_VERSION || '')
-          core.exportVariable('DISABLE_COMPILATION', 'true')
-          core.exportVariable('DISABLE_VERIFICATION_EXCEPT_TESTS', 'true')
-    - name: Cache Gradle
-      uses: remal-github-actions/cache-gradle@v1
+          setEnvVar('CURRENT_JAVA_VERSION', '${{fromJSON(inputs.job-matrix-json)['java-runtime'] || ''}}' || process.env.DEFAULT_JAVA_VERSION || '')
+          setEnvVar('DISABLE_COMPILATION', 'true')
+          setEnvVar('DISABLE_VERIFICATION_EXCEPT_TESTS', 'true')
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v6
       with:
-        github-job: 'test-${{inputs.os}}-${{inputs.job-matrix-json}}'
+        validate-wrappers: false
+        workflow-job-context: ${{inputs.job-matrix-json}}
     - name: Setup Java ${{env.CURRENT_JAVA_VERSION != env.DEFAULT_JAVA_VERSION && format('{0} and {1}', env.DEFAULT_JAVA_VERSION, env.CURRENT_JAVA_VERSION) || env.DEFAULT_JAVA_VERSION}}
       uses: actions/setup-java@v5
       with:
