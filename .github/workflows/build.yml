@@ -23,8 +23,9 @@ on:
         - 'false'
 
 permissions:
-  id-token: write
   contents: write
+  actions: write
+  checks: read
 
 concurrency:
   group: build-${{github.ref}}
