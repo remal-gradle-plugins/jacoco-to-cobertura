@@ -24,8 +24,8 @@ buildscript {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 allprojects {
-    group = project.rootGroupId
-    version = project.rootSnapshotVersion
+    group = rootProject.ext.rootGroupId
+    version = rootProject.ext.rootSnapshotVersion
 }
 
 apply plugin: 'name.remal.toolkit.build-logic'
