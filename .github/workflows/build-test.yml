@@ -42,8 +42,9 @@ jobs:
   test:
     name: "test ${{inputs.os}} ${{inputs.job-matrix-json}}"
     permissions:
-      id-token: write
       contents: read
+      actions: write
+      checks: read
     concurrency:
       group: build-test-${{inputs.os}}-${{inputs.job-matrix-json}}-${{github.ref}}
       cancel-in-progress: true
