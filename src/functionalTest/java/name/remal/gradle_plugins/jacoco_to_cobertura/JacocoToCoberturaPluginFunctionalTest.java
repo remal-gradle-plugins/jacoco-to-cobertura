@@ -4,6 +4,7 @@ import static java.lang.String.join;
 import static java.math.RoundingMode.HALF_UP;
 import static java.util.stream.Collectors.joining;
 import static name.remal.gradle_plugins.toolkit.testkit.TestClasspath.getTestClasspathLibraryFilePaths;
+import static name.remal.gradle_plugins.toolkit.testkit.functional.generator.utils.MavenCentralRepositoryUtils.addMavenCentralRepository;
 import static name.remal.gradle_plugins.toolkit.xml.XmlUtils.parseXml;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,7 +40,7 @@ class JacocoToCoberturaPluginFunctionalTest {
             });
             coberturaReportPath = project.resolveRelativePath("build/cobertura-jacoco.xml");
 
-            build.line("repositories { mavenCentral() }");
+            addMavenCentralRepository(build);
 
             build.block("dependencies", deps -> {
                 deps.line(
