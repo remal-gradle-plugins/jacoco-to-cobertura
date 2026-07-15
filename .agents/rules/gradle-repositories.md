@@ -13,3 +13,4 @@
 - Declare `gradlePluginPortal()` before `mavenCentral()`.
 - In project-scope blocks where `project.isRunningOnCi` is available, guard the mirror with `if (project.isRunningOnCi)` instead. In `buildscript {}` and `settings` blocks, use `System.getenv('CI') == 'true'`.
 - In Kotlin DSL (`*.gradle.kts`), use `if (System.getenv("CI") == "true")` with the same `maven { ... }` body.
+- In functional tests (Gradle TestKit), add Maven Central to a generated build file by calling `MavenCentralRepositoryUtils.addMavenCentralRepository(content)` (in the `toolkit.testkit` module) instead of writing `mavenCentral()` and the mirror by hand. It emits the CI-gated mirror followed by `mavenCentral()`.
