@@ -24,6 +24,8 @@ class JacocoToCoberturaPluginFunctionalTest {
 
     @BeforeEach
     void beforeEach() {
+        coberturaReportPath = project.resolveRelativePath("build/cobertura-jacoco.xml");
+
         project.forBuildFile(build -> {
             build.applyPlugin("name.remal.jacoco-to-cobertura");
 
@@ -38,7 +40,6 @@ class JacocoToCoberturaPluginFunctionalTest {
                 taskBlock.line("dependsOn('test')");
                 taskBlock.line("reports.xml.outputLocation = file('build/jacoco.xml')");
             });
-            coberturaReportPath = project.resolveRelativePath("build/cobertura-jacoco.xml");
 
             addMavenCentralRepository(build);
 
