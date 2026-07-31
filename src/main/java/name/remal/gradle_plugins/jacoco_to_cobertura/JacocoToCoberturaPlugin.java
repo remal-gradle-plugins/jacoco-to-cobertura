@@ -5,18 +5,18 @@ import static name.remal.gradle_plugins.toolkit.ExtensionContainerUtils.getExten
 import static name.remal.gradle_plugins.toolkit.ObjectUtils.doNotInline;
 import static name.remal.gradle_plugins.toolkit.TaskUtils.doBeforeTaskExecution;
 
-import org.gradle.api.Plugin;
+import name.remal.gradle_plugins.toolkit.AbstractSettingsAwarePlugin;
 import org.gradle.api.Project;
 import org.gradle.api.reflect.TypeOf;
 import org.gradle.api.tasks.TaskProvider;
 import org.gradle.testing.jacoco.tasks.JacocoReport;
 
-public class JacocoToCoberturaPlugin implements Plugin<Project> {
+public class JacocoToCoberturaPlugin extends AbstractSettingsAwarePlugin {
 
     public static final String JACOCO_TO_COBERTURA_TASK_EXTENSION_NAME = doNotInline("jacocoToCoberturaTask");
 
     @Override
-    public void apply(Project project) {
+    protected void applyToProject(Project project) {
         var tasks = project.getTasks();
         tasks.withType(JacocoReport.class).all(JacocoToCoberturaPlugin::configureJacocoTask);
     }
