@@ -37,7 +37,7 @@ apply plugin: 'java-gradle-plugin'
 dependencies {
     testImplementation 'com.google.jimfs:jimfs:1.3.2'
     testImplementation 'org.xmlunit:xmlunit-core:2.13.0'
-    testImplementation 'io.github.classgraph:classgraph:4.8.193'
+    testImplementation 'io.github.classgraph:classgraph:4.8.194'
 }
 
 gradlePlugin {
