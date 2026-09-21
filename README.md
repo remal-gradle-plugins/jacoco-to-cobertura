@@ -11,7 +11,7 @@
 
 # `name.remal.jacoco-to-cobertura` plugin
 
-[![configuration cache: supported](https://img.shields.io/static/v1?label=configuration%20cache&message=supported&color=success)](https://docs.gradle.org/current/userguide/configuration_cache.html)
+[![configuration cache: supported](https://img.shields.io/static/v1?label=configuration%20cache&message=supported&color=success)](https://docs.gradle.org/current/userguide/configuration_cache.html) [![isolated projects: supported from v2.0.2](https://img.shields.io/static/v1?label=isolated%20projects&message=supported%20from%20v2.0.2&color=success)](https://docs.gradle.org/current/userguide/isolated_projects.html)
 
 Usage:
 
