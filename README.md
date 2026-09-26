@@ -5,9 +5,9 @@
 
 &nbsp;
 
-**Tested on Java LTS versions from <!--property:java-runtime.min-version-->11<!--/property--> to <!--property:java-runtime.max-version-->26<!--/property-->.**
+**Tested on Java LTS versions from <!--property:java-runtime.min-version-->11<!--/property--> to <!--property:java-runtime.max-version-->27<!--/property-->.**
 
-**Tested on Gradle versions from <!--property:gradle-api.min-version-->7.0<!--/property--> to <!--property:gradle-api.max-version-->9.8.0-rc-2<!--/property-->.**
+**Tested on Gradle versions from <!--property:gradle-api.min-version-->7.0<!--/property--> to <!--property:gradle-api.max-version-->9.8.0<!--/property-->.**
 
 # `name.remal.jacoco-to-cobertura` plugin
 
